@@ -10,9 +10,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cms</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
-        <main.verticle>io.github.lhr.api.CmsMainVerticle</main.verticle>
+        <main.verticle>io.github.lhr.cms.CmsMainVerticle</main.verticle>
     </properties>
 
     <dependencies>

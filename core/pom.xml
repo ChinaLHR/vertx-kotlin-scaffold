@@ -10,6 +10,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>core</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -27,6 +28,10 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-config</artifactId>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
@@ -48,4 +53,5 @@
 
         </plugins>
     </build>
+
 </project>
