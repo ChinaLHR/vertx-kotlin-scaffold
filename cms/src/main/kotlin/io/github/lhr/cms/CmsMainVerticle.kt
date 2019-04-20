@@ -11,7 +11,8 @@ import io.vertx.core.Future
 class CmsMainVerticle : AbstractVerticle() {
 
     override fun start(startFuture: Future<Void>) {
-        val port = config().getInteger("port")
+        val port = config().getJsonObject("port").getInteger("cms" +
+                "")
 
         vertx
                 .createHttpServer()

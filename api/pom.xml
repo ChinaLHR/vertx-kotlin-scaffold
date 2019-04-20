@@ -91,24 +91,6 @@
             <!--打包资源处理-->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-resources</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${build.path}/conf</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${project.build.directory}/classes/conf/</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
