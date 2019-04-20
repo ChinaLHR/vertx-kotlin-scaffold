@@ -14,7 +14,6 @@
 
     <properties>
         <main.verticle>io.github.lhr.api.ApiMainVerticle</main.verticle>
-        <build.path></build.path>
     </properties>
 
     <dependencies>
@@ -89,9 +88,9 @@
                 </configuration>
             </plugin>
 
+            <!--打包资源处理-->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -103,7 +102,7 @@
                             <outputDirectory>${build.path}/conf</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.build.directory}/classes/conf</directory>
+                                    <directory>${project.build.directory}/classes/conf/</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>

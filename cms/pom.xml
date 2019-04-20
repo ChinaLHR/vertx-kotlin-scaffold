@@ -14,12 +14,17 @@
 
     <properties>
         <main.verticle>io.github.lhr.cms.CmsMainVerticle</main.verticle>
+
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>io.github.lhr</groupId>
             <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web</artifactId>
         </dependency>
     </dependencies>
 
@@ -59,7 +64,7 @@
                             </transformers>
                             <artifactSet>
                             </artifactSet>
-                            <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar
+                            <outputFile>${build.path}/${project.artifactId}-${project.version}-fat.jar
                             </outputFile>
                         </configuration>
                     </execution>
@@ -82,6 +87,29 @@
                         <argument>${main.verticle}</argument>
                     </arguments>
                 </configuration>
+            </plugin>
+
+            <!--打包资源处理-->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${build.path}/conf</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/classes/conf</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

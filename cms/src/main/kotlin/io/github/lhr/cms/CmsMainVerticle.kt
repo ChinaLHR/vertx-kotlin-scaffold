@@ -11,6 +11,8 @@ import io.vertx.core.Future
 class CmsMainVerticle : AbstractVerticle() {
 
     override fun start(startFuture: Future<Void>) {
+        val port = config().getInteger("port")
+
         vertx
                 .createHttpServer()
                 .requestHandler { req ->
@@ -18,7 +20,7 @@ class CmsMainVerticle : AbstractVerticle() {
                             .putHeader("content-type", "text/plain")
                             .end("Hello from Vert.x-Stack Cms!")
                 }
-                .listen(10020) { http ->
+                .listen(port) { http ->
                     if (http.succeeded()) {
                         startFuture.complete()
                         println("HTTP server started on port 10020")

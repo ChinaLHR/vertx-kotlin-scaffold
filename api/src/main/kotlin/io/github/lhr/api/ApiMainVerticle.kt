@@ -12,7 +12,7 @@ class ApiMainVerticle : AbstractVerticle() {
 
     override fun start(startFuture: Future<Void>) {
 
-        val port = config().getInteger("api.port")
+        val port = config().getInteger("port")
         vertx
                 .createHttpServer()
                 .requestHandler { req ->

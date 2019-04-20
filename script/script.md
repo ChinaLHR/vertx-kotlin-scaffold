@@ -2,11 +2,19 @@
 - run-dev
 
 ```
-mvn clean package exec:java -P dev -Dmaven.test.skip=true
+mvn clean package -Dmaven.test.skip=true -Dbuild.path=S:\Code\Github\vertx-kotlin-scaffold\build -f pom.xml
+
+java -jar api-1.0.0-SNAPSHOT-fat.jar -conf conf/api/dev/conf.json
 ```
 
 - run-production
 
 ```
+kill -9 pid
+rm -rf /home/build/api-1.0.0-SNAPSHOT-fat.jar
+rm -rf /home/build/conf/api 
 
+mvn clean package -Dmaven.test.skip=true -Dbuild.path=\home\build -f pom.xml
+
+java -jar api-1.0.0-SNAPSHOT-fat.jar -conf conf/api/production/conf.json
 ```
