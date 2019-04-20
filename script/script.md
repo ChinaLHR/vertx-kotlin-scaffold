@@ -5,6 +5,7 @@
 mvn clean package -Dmaven.test.skip=true -Dbuild.path=S:\Code\Github\vertx-kotlin-scaffold\build -f pom.xml
 
 java -jar api-1.0.0-SNAPSHOT-fat.jar -conf conf/dev/conf.json
+java -jar cms-1.0.0-SNAPSHOT-fat.jar -conf conf/dev/conf.json
 ```
 
 - run-production

@@ -1,6 +1,7 @@
 package io.github.lhr.cms
 
-import io.vertx.core.AbstractVerticle
+import io.github.lhr.core.verticle.CoreVerticle
+import io.github.lhr.core.verticle.httpConf
 import io.vertx.core.Future
 
 
@@ -8,12 +9,8 @@ import io.vertx.core.Future
  * @author lhr
  * @date 2019/4/14
  */
-class CmsMainVerticle : AbstractVerticle() {
-
-    override fun start(startFuture: Future<Void>) {
-        val port = config().getJsonObject("port").getInteger("cms" +
-                "")
-
+class CmsMainVerticle : CoreVerticle() {
+    override fun runStart(startFuture: Future<Void>) {
         vertx
                 .createHttpServer()
                 .requestHandler { req ->
@@ -21,15 +18,15 @@ class CmsMainVerticle : AbstractVerticle() {
                             .putHeader("content-type", "text/plain")
                             .end("Hello from Vert.x-Stack Cms!")
                 }
-                .listen(port) { http ->
+                .listen(httpConf.port.cms) { http ->
                     if (http.succeeded()) {
                         startFuture.complete()
-                        println("HTTP server started on port 10020")
+                        println("HTTP server started on port ${httpConf.port.cms}")
                     } else {
                         startFuture.fail(http.cause())
                     }
                 }
-
     }
+
 
 }
