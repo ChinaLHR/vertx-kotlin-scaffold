@@ -1,13 +1,15 @@
 package io.github.lhr.core.verticle
 
-import io.github.lhr.core.conf.HttpConf
-import io.github.lhr.core.conf.HttpConf.port
+import io.github.lhr.core.dao.DbPool
+import io.github.lhr.core.domain.conf.HttpConf
+import io.github.lhr.core.domain.conf.MySqlConf
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Future
 import io.vertx.core.json.JsonObject
 
 
 lateinit var httpConf: HttpConf
+lateinit var mysqlConf: MySqlConf
 
 /**
  * @author lhr
@@ -21,17 +23,19 @@ abstract class CoreVerticle : AbstractVerticle() {
 
         //配置Config
         setConf(conf)
+        //init dbPool
+        DbPool.INSTANCE
+
         runStart(startFuture)
     }
 
     private fun setConf(conf: JsonObject) {
         val httpJsonObj = conf.getJsonObject("http")
-        setHttpConf(httpJsonObj)
+        httpConf = httpJsonObj.mapTo(HttpConf.javaClass)
+        val mysqlJsonObj = conf.getJsonObject("mysql")
+        mysqlConf = mysqlJsonObj.mapTo(MySqlConf.javaClass)
     }
 
-    private fun setHttpConf(httpJsonObj: JsonObject) {
-        httpConf = httpJsonObj.mapTo(HttpConf.javaClass)
-    }
 
     abstract fun runStart(startFuture: Future<Void>)
 }

@@ -1,4 +1,4 @@
-package io.github.lhr.core.conf
+package io.github.lhr.core.domain.conf
 
 
 /**

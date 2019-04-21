@@ -4,5 +4,19 @@
       "api": 10010,
       "cms": 10020
     }
+  },
+  "mysql": {
+    "base": {
+      "host": "127.0.0.1",
+      "port": 3306,
+      "username": "root",
+      "password": "root",
+      "database": "test"
+    },
+    "pool": {
+      "maxIdleTime": 15,
+      "maxPendingQueries": 10000,
+      "queryTimeout": 5000
+    }
   }
 }
