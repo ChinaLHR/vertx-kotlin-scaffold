@@ -6,6 +6,8 @@ import io.github.lhr.core.domain.conf.MySqlConf
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Future
 import io.vertx.core.json.JsonObject
+import org.slf4j.LoggerFactory
+import org.slf4j.LoggerFactory.getLogger
 
 
 lateinit var httpConf: HttpConf
@@ -19,13 +21,19 @@ lateinit var mysqlConf: MySqlConf
 abstract class CoreVerticle : AbstractVerticle() {
 
     override fun start(startFuture: Future<Void>) {
-        val conf = config()
+        //logger
+        System.setProperty("vertx.logger-delegate-factory-class-name", "io.vertx.core.logging.SLF4JLogDelegateFactory");
+        val logger = getLogger(LoggerFactory::class.java)
 
+        val conf = config()
         //配置Config
         setConf(conf)
         //init dbPool
         DbPool.INSTANCE
+        //TODO 健康检查
 
+        logger.info("Init CoreVerticle Success,Conf:{} ",
+                conf.toString())
         runStart(startFuture)
     }
 
