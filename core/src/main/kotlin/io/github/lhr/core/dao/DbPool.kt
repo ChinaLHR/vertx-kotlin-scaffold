@@ -4,8 +4,8 @@ import com.github.jasync.sql.db.Configuration
 import com.github.jasync.sql.db.ConnectionPoolConfiguration
 import com.github.jasync.sql.db.mysql.pool.MySQLConnectionFactory
 import com.github.jasync.sql.db.pool.ConnectionPool
-import io.github.lhr.core.domain.conf.MySqlConf.base
-import io.github.lhr.core.domain.conf.MySqlConf.pool
+import io.github.lhr.core.domain.conf.mysqlConf
+
 import java.util.concurrent.TimeUnit
 
 /**
@@ -14,16 +14,16 @@ import java.util.concurrent.TimeUnit
 class DbPool private constructor() {
 
     private val configuration = Configuration(
-            base.username,
-            base.host,
-            base.port,
-            base.password,
-            base.database)
+            mysqlConf.base.username,
+            mysqlConf.base.host,
+            mysqlConf.base.port,
+            mysqlConf.base.password,
+            mysqlConf.base.database)
 
     private val poolConfiguration = ConnectionPoolConfiguration(
-            maxIdleTime = TimeUnit.MINUTES.toMillis(pool.maxIdleTime),
-            maxPendingQueries = pool.maxPendingQueries,
-            queryTimeout = pool.queryTimeout
+            maxIdleTime = TimeUnit.MINUTES.toMillis(mysqlConf.pool.maxIdleTime),
+            maxPendingQueries = mysqlConf.pool.maxPendingQueries,
+            queryTimeout = mysqlConf.pool.queryTimeout
     )
 
     val connectionPool = ConnectionPool(
