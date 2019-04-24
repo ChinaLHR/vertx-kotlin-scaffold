@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory.getLogger
  * @date 2019/4/20
  * 通用Verticle 提供通用配置获取
  *
- * TODO 健康检查
+ * TODO 健康检查 数据校验JSR303 多Verticle部署 db完善
  */
 abstract class CoreVerticle : AbstractVerticle() {
 
