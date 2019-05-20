@@ -1,8 +1,7 @@
 package io.github.lhr.core.dao
 
 import io.github.lhr.core.entity.User
-import io.reactivex.Single
-import kotlin.streams.toList
+import io.vertx.kotlin.ext.sql.queryAwait
 
 
 /**
@@ -11,15 +10,14 @@ import kotlin.streams.toList
  */
 class UserDao {
 
-    fun getAll(): Single<List<User>> {
-        return jdbcClient.rxQuery("select * from user")
-                .map { it ->
-                    it.rows.stream()
-                            .map {
-                               it.mapTo(User::class.java)
-                            }
-                            .toList()
+    suspend fun getAll(): List<User> {
+        return jdbcClient.queryAwait(sql = "select * from user")
+                .rows
+                .map {
+                    it.mapTo(User::class.java)
                 }
     }
+
+
 
 }

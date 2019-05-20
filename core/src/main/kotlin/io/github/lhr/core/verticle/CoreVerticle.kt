@@ -5,12 +5,12 @@ import io.github.lhr.core.conf.HttpConf
 import io.github.lhr.core.conf.httpConf
 import io.github.lhr.core.conf.mysqlConf
 import io.github.lhr.core.dao.jdbcClient
+import io.vertx.core.AbstractVerticle
 import io.vertx.core.Future
+import io.vertx.core.Vertx
 import io.vertx.core.json.Json
 import io.vertx.core.json.JsonObject
-import io.vertx.reactivex.core.AbstractVerticle
-import io.vertx.reactivex.core.Vertx
-import io.vertx.reactivex.ext.jdbc.JDBCClient
+import io.vertx.ext.jdbc.JDBCClient
 import org.slf4j.LoggerFactory
 import org.slf4j.LoggerFactory.getLogger
 
@@ -50,6 +50,7 @@ abstract class CoreVerticle : AbstractVerticle() {
 
     private fun initJdbcClient(vertx: Vertx){
         jdbcClient = JDBCClient.createShared(vertx, mysqlConf)
+//                .createShared(vertx, mysqlConf)
     }
 
     abstract fun runStart(startFuture: Future<Void>)

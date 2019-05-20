@@ -1,7 +1,8 @@
 package io.github.lhr.api.handler
 
 import io.github.lhr.core.dao.UserDao
-import io.vertx.reactivex.ext.web.RoutingContext
+import io.github.lhr.core.ext.ok
+import io.vertx.ext.web.RoutingContext
 
 
 /**
@@ -24,7 +25,9 @@ class UserHandler {
 
     }
 
-    fun findAll(ctx: RoutingContext) {
+    suspend fun findAll(ctx: RoutingContext) {
+        val result = userDao.getAll()
+        ctx.ok(result)
     }
 
 }

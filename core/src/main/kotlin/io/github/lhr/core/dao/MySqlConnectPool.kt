@@ -1,6 +1,6 @@
 package io.github.lhr.core.dao
 
-import io.vertx.reactivex.ext.jdbc.JDBCClient
+import io.vertx.ext.jdbc.JDBCClient
 
 
 lateinit var jdbcClient: JDBCClient
