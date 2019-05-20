@@ -17,10 +17,10 @@ class Routes(val vertx: Vertx) : CoroutineRoute(vertx) {
         val userHandler = UserHandler()
 
         val subRouter = Router.router(vertx)
-        val apply = Router.router(vertx).apply {
+        val apiRoute = Router.router(vertx).apply {
             subRouter.route("/User/findAll").coroutineHandler { ctx -> userHandler.findAll(ctx) }
         }
 
-        router.mountSubRouter("/api", apply)
+        router.mountSubRouter("/api", apiRoute)
     }
 }
