@@ -1,6 +1,6 @@
 package io.github.lhr.cms
 
-import io.github.lhr.core.domain.conf.httpConf
+import io.github.lhr.core.conf.httpConf
 import io.github.lhr.core.verticle.CoreVerticle
 import io.vertx.core.Future
 

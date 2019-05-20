@@ -1,15 +1,16 @@
 package io.github.lhr.core.verticle
 
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import io.github.lhr.core.dao.DbPool
-import io.github.lhr.core.domain.conf.HttpConf
-import io.github.lhr.core.domain.conf.MySqlConf
-import io.github.lhr.core.domain.conf.httpConf
-import io.github.lhr.core.domain.conf.mysqlConf
-import io.vertx.core.AbstractVerticle
+import io.github.lhr.core.conf.HttpConf
+import io.github.lhr.core.conf.httpConf
+import io.github.lhr.core.conf.mysqlConf
+import io.github.lhr.core.dao.jdbcClient
 import io.vertx.core.Future
 import io.vertx.core.json.Json
 import io.vertx.core.json.JsonObject
+import io.vertx.reactivex.core.AbstractVerticle
+import io.vertx.reactivex.core.Vertx
+import io.vertx.reactivex.ext.jdbc.JDBCClient
 import org.slf4j.LoggerFactory
 import org.slf4j.LoggerFactory.getLogger
 
@@ -19,7 +20,6 @@ import org.slf4j.LoggerFactory.getLogger
  * @date 2019/4/20
  * 通用Verticle 提供通用配置获取
  *
- * TODO 健康检查 数据校验JSR303 多Verticle部署 db完善
  */
 abstract class CoreVerticle : AbstractVerticle() {
 
@@ -36,9 +36,8 @@ abstract class CoreVerticle : AbstractVerticle() {
         val conf = config()
         //配置Config
         setConf(conf)
-        //init dbPool
-        DbPool.INSTANCE
-
+        //initJdbcClient
+        initJdbcClient(vertx)
         logger.info("Init CoreVerticle Success,Conf:{} ",
                 conf.toString())
     }
@@ -46,10 +45,12 @@ abstract class CoreVerticle : AbstractVerticle() {
     private fun setConf(conf: JsonObject) {
         val httpJsonObj = conf.getJsonObject("http")
         httpConf = httpJsonObj.mapTo(HttpConf::class.java)
-        val mysqlJsonObj = conf.getJsonObject("mysql")
-        mysqlConf = mysqlJsonObj.mapTo(MySqlConf::class.java)
+        mysqlConf = conf.getJsonObject("mysql")
     }
 
+    private fun initJdbcClient(vertx: Vertx){
+        jdbcClient = JDBCClient.createShared(vertx, mysqlConf)
+    }
 
     abstract fun runStart(startFuture: Future<Void>)
 }

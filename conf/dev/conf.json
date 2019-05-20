@@ -6,17 +6,14 @@
     }
   },
   "mysql": {
-    "base": {
-      "host": "127.0.0.1",
-      "port": 3306,
-      "username": "root",
-      "password": "root",
-      "database": "test"
-    },
-    "pool": {
-      "maxIdleTime": 15,
-      "maxPendingQueries": 10000,
-      "queryTimeout": 5000
-    }
+    "provider_class": "io.vertx.ext.jdbc.spi.impl.HikariCPDataSourceProvider",
+    "jdbcUrl": "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8",
+    "driverClassName": "com.mysql.jdbc.Driver",
+    "username": "root",
+    "password": "root",
+    "maximumPoolSize": 50,
+    "cachePrepStmts": true,
+    "prepStmtCacheSize": 250,
+    "prepStmtCacheSqlLimit": 2048
   }
 }

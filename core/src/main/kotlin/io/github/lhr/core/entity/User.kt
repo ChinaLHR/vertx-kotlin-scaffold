@@ -1,4 +1,4 @@
-package io.github.lhr.core.domain.user
+package io.github.lhr.core.entity
 
 
 /**
@@ -6,7 +6,7 @@ package io.github.lhr.core.domain.user
  * @date 2019/4/23
  */
 
-data class User(
+class User(
         var id: Long,
         var name: String
 )
