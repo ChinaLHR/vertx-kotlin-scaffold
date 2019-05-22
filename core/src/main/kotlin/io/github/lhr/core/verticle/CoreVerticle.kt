@@ -5,12 +5,11 @@ import io.github.lhr.core.conf.HttpConf
 import io.github.lhr.core.conf.httpConf
 import io.github.lhr.core.conf.mysqlConf
 import io.github.lhr.core.dao.jdbcClient
-import io.vertx.core.AbstractVerticle
-import io.vertx.core.Future
 import io.vertx.core.Vertx
 import io.vertx.core.json.Json
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.jdbc.JDBCClient
+import io.vertx.kotlin.coroutines.CoroutineVerticle
 import org.slf4j.LoggerFactory
 import org.slf4j.LoggerFactory.getLogger
 
@@ -21,11 +20,11 @@ import org.slf4j.LoggerFactory.getLogger
  * 通用Verticle 提供通用配置获取
  *
  */
-abstract class CoreVerticle : AbstractVerticle() {
+abstract class CoreVerticle : CoroutineVerticle() {
 
-    override fun start(startFuture: Future<Void>) {
+    override suspend fun start() {
         init()
-        runStart(startFuture)
+        runStart()
     }
 
     private fun init() {
@@ -33,13 +32,12 @@ abstract class CoreVerticle : AbstractVerticle() {
         System.setProperty("vertx.logger-delegate-factory-class-name", "io.vertx.core.logging.SLF4JLogDelegateFactory");
         val logger = getLogger(LoggerFactory::class.java)
         Json.mapper.registerModule(KotlinModule())
-        val conf = config()
         //配置Config
-        setConf(conf)
+        setConf(config)
         //initJdbcClient
         initJdbcClient(vertx)
         logger.info("Init CoreVerticle Success,Conf:{} ",
-                conf.toString())
+                config.toString())
     }
 
     private fun setConf(conf: JsonObject) {
@@ -50,8 +48,7 @@ abstract class CoreVerticle : AbstractVerticle() {
 
     private fun initJdbcClient(vertx: Vertx){
         jdbcClient = JDBCClient.createShared(vertx, mysqlConf)
-//                .createShared(vertx, mysqlConf)
     }
 
-    abstract fun runStart(startFuture: Future<Void>)
+    abstract suspend fun runStart()
 }
