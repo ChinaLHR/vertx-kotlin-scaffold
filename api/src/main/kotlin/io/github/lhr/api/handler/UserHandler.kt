@@ -1,6 +1,7 @@
 package io.github.lhr.api.handler
 
 import io.github.lhr.core.dao.UserDao
+import io.github.lhr.core.entity.User
 import io.github.lhr.core.ext.ok
 import io.vertx.ext.web.RoutingContext
 
@@ -13,16 +14,20 @@ class UserHandler {
 
     private val userDao = UserDao()
 
-    fun findById(ctx: RoutingContext) {
-//        userDao.
+    suspend fun findById(ctx: RoutingContext) {
+        val id = ctx.request().getParam("id")
+        val result = userDao.getById(id)
+        ctx.ok(result)
     }
 
-    fun insertUser(ctx: RoutingContext) {
-
+    suspend fun insertUser(ctx: RoutingContext) {
+        val name = ctx.request().getParam("name")
+        userDao.insertUser(name)
     }
 
-    fun updateUser(ctx: RoutingContext) {
-
+    suspend fun updateUser(ctx: RoutingContext) {
+        val user = ctx.bodyAsJson.mapTo(User::class.java)
+        userDao.updateById(user)
     }
 
     suspend fun findAll(ctx: RoutingContext) {

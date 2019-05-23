@@ -11,17 +11,14 @@ import io.vertx.ext.web.Router
  * @date 2019/5/20
  */
 
-class Routes(val vertx: Vertx) : CoroutineRoute(vertx) {
+class Routes(vertx: Vertx) : CoroutineRoute(vertx) {
 
-    fun initRoute(router: Router){
+    fun initRoute(router: Router) {
         val userHandler = UserHandler()
-
-//        val subRouter = Router.router(vertx)
-//        val apiRoute = Router.router(vertx).apply {
-//            subRouter.get("/findAll").coroutineHandler { ctx -> userHandler.findAll(ctx) }
-//        }
-//
-//        router.mountSubRouter("/user", apiRoute)
-        router.get("/user/findAll").coroutineHandler { ctx->userHandler.findAll(ctx) }
+        router.mountSubRouter("/api", router)
+        router.get("/user/findAll").coroutineHandler { ctx -> userHandler.findAll(ctx) }
+        router.get("/user/findOne").coroutineHandler { ctx -> userHandler.findById(ctx) }
+        router.post("/user/update").coroutineHandler { ctx -> userHandler.updateUser(ctx) }
+        router.get("/user/save").coroutineHandler { ctx -> userHandler.insertUser(ctx) }
     }
 }

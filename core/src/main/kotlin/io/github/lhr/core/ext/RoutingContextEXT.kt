@@ -8,7 +8,7 @@ import io.vertx.ext.web.RoutingContext
  * @author lhr
  * @date 2019/5/20
  */
-fun RoutingContext.ok(result: Any):Unit{
+fun RoutingContext.ok(result: Any) {
     this.response()
             .putHeader("content-type","application/json")
             .setStatusCode(200)
