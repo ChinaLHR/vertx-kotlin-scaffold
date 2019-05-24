@@ -2,6 +2,7 @@ package io.github.lhr.api.routes
 
 import io.github.lhr.api.handler.UserHandler
 import io.github.lhr.core.common.CoroutineRoute
+import io.github.lhr.core.ext.ok
 import io.vertx.core.Vertx
 import io.vertx.ext.web.Router
 

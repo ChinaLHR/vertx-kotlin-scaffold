@@ -10,7 +10,7 @@ import io.github.lhr.core.verticle.CoreVerticle
 class CmsMainVerticle : CoreVerticle() {
 
     override suspend fun runStart() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO
     }
 
 
