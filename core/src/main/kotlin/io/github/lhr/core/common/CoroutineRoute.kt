@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.slf4j.LoggerFactory
+import java.lang.IllegalArgumentException
 import kotlin.coroutines.CoroutineContext
 
 
@@ -17,20 +18,25 @@ import kotlin.coroutines.CoroutineContext
  * @date 2019/5/20
  */
 
-open class CoroutineRoute(vertx: Vertx): CoroutineScope {
+open class CoroutineRoute(vertx: Vertx) : CoroutineScope {
     override val coroutineContext: CoroutineContext by lazy { vertx.dispatcher() }
 
-    fun Route.coroutineHandler(fn:suspend (RoutingContext) -> Unit){
+    fun Route.coroutineHandler(fn: suspend (RoutingContext) -> Unit) {
         val logger = LoggerFactory.getLogger(LoggerFactory::class.java)
         val launch = GlobalScope.launch { }
-        handler {ctx ->
+        handler { ctx ->
             launch {
                 try {
                     fn(ctx)
                 } catch (e: Exception) {
                     //todo 业务异常捕获处理
-                    logger.error("Handler Error URL:{}",ctx.request().uri(),e)
-                    ctx.ok("error")
+                    logger.error("Handler Error URL:{}", ctx.request().uri(), e)
+
+                    when (e) {
+                        is IllegalArgumentException -> ctx.ok("数据缺失")
+
+                        else -> ctx.ok("系统繁忙")
+                    }
                 }
             }
         }

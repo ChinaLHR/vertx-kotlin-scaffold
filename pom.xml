@@ -68,6 +68,17 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>bintray</id>
+            <name>bintray maven</name>
+            <url>https://dl.bintray.com/konform-kt/konform</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <dependencyManagement>
@@ -144,6 +155,13 @@
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
                 <version>${logback.version}</version>
+            </dependency>
+
+            <!--validator-->
+            <dependency>
+                <groupId>io.konform</groupId>
+                <artifactId>konform</artifactId>
+                <version>0.1.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
