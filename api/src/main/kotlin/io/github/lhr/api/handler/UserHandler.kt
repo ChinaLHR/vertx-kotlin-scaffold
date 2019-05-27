@@ -4,7 +4,11 @@ import io.github.lhr.core.dao.UserDao
 import io.github.lhr.core.entity.User
 import io.github.lhr.core.exception.BusinessException
 import io.github.lhr.core.ext.ok
+import io.konform.validation.Valid
+import io.konform.validation.Validation
+import io.konform.validation.jsonschema.minimum
 import io.vertx.ext.web.RoutingContext
+import sun.plugin.util.UserProfile
 
 
 /**
@@ -14,6 +18,12 @@ import io.vertx.ext.web.RoutingContext
 class UserHandler {
 
     private val userDao = UserDao()
+
+    private val validateUserId = Validation<User> {
+        User::id {
+            minimum(1) hint "id需要大于0"
+        }
+    }
 
     suspend fun findById(ctx: RoutingContext) {
         val id = ctx.request().getParam("id")
@@ -29,7 +39,9 @@ class UserHandler {
 
     suspend fun updateUser(ctx: RoutingContext) {
         val user = ctx.bodyAsJson.mapTo(User::class.java)
-        user ?: throw BusinessException("输入参数为Null")
+        validateUserId.validate(user)[User::id]?.let {
+            throw BusinessException(it.toString())
+        }
         userDao.updateById(user)
         ctx.ok("操作成功")
     }
