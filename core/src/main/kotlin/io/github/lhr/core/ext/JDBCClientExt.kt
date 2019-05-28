@@ -1,4 +1,4 @@
-package io.github.lhr.core.dao
+package io.github.lhr.core.ext
 
 import io.vertx.ext.jdbc.JDBCClient
 import io.vertx.ext.sql.SQLConnection

@@ -1,6 +1,7 @@
 package io.github.lhr.api
 
 import io.github.lhr.api.handler.GlobalErrorHandler
+import io.github.lhr.api.handler.LimitHandler
 import io.github.lhr.api.routes.Routes
 import io.github.lhr.core.conf.httpConf
 import io.github.lhr.core.verticle.CoreVerticle
@@ -25,7 +26,9 @@ class ApiMainVerticle : CoreVerticle() {
         router.route().handler(LoggerHandler.create(LoggerFormat.DEFAULT))
         //程序处理超时时间
         router.route().handler(TimeoutHandler.create(5000))
-        //全局异常处理t
+        //限流
+        router.route().handler(LimitHandler())
+        //全局异常处理
         router.route().last().handler(GlobalErrorHandler())
         Routes(vertx).initRoute(router)
         vertx.createHttpServer()
