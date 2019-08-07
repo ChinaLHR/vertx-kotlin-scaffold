@@ -11,9 +11,9 @@
     "driverClassName": "com.mysql.jdbc.Driver",
     "username": "root",
     "password": "root",
-    "maximumPoolSize": 50,
+    "maximumPoolSize": 100,
     "cachePrepStmts": true,
-    "prepStmtCacheSize": 250,
+    "prepStmtCacheSize": 300,
     "prepStmtCacheSqlLimit": 2048
   }
 }

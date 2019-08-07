@@ -24,7 +24,6 @@ open class CoroutineRoute(vertx: Vertx) : CoroutineScope {
 
     fun Route.coroutineHandler(fn: suspend (RoutingContext) -> Unit) {
         val logger = LoggerFactory.getLogger(LoggerFactory::class.java)
-        val launch = GlobalScope.launch { }
         handler { ctx ->
             launch {
                 try {
@@ -35,7 +34,6 @@ open class CoroutineRoute(vertx: Vertx) : CoroutineScope {
 
                     when (e) {
                         is IllegalArgumentException -> ctx.ok("数据缺失")
-
                         is BusinessException -> e.message?.let { ctx.ok(it) }
                         else -> ctx.ok("系统繁忙")
                     }

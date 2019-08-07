@@ -14,7 +14,7 @@ import java.io.File
  * k-> conf v-> 参考script
  */
 
-fun main(args: Array<String>) {
+fun main() {
     val file = File(System.getenv("conf"))
     val jsonStr = file.readText(Charsets.UTF_8)
     val conf = JsonObject(jsonStr)

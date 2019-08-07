@@ -26,8 +26,8 @@ class ApiMainVerticle : CoreVerticle() {
         router.route().handler(LoggerHandler.create(LoggerFormat.DEFAULT))
         //程序处理超时时间
         router.route().handler(TimeoutHandler.create(5000))
-        //限流
-        router.route().handler(LimitHandler())
+        //限流 使用Nginx进行ip限流处理
+        //router.route().handler(LimitHandler())
         //全局异常处理
         router.route().last().handler(GlobalErrorHandler())
         Routes(vertx).initRoute(router)

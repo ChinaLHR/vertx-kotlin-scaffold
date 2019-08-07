@@ -18,7 +18,7 @@ class UserDao {
 
 
     suspend fun getAll(): List<User> {
-        return jdbcClient.queryAwait(sql = "select * from user")
+        return jdbcClient.queryAwait("select * from user")
                 .rows
                 .map {
                     it.mapTo(User::class.java) ?: throw BusinessException("用户不存在")
