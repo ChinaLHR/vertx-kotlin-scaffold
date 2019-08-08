@@ -40,8 +40,8 @@ class UserDao {
         if (result.updated != 1) throw BusinessException("操作失败")
     }
 
-    suspend fun insertUser(name: String) {
-        jdbcClient.updateWithParamsAwait("insert into user (name) values (?)", JsonArray(listOf(name)))
+    suspend fun insertUser(name: String, sexType: Int) {
+        jdbcClient.updateWithParamsAwait("insert into user (name,sex_type) values (?,?)", JsonArray(listOf(name, sexType)))
     }
 
 }

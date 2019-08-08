@@ -33,7 +33,8 @@ class UserHandler {
 
     suspend fun insertUser(ctx: RoutingContext) {
         val name = ctx.request().getParam("name")
-        userDao.insertUser(name)
+        val sexType = ctx.request().getParam("sexType").toInt()
+        userDao.insertUser(name, sexType)
         ctx.ok("操作成功")
     }
 
