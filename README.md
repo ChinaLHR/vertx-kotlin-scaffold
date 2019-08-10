@@ -1,12 +1,11 @@
 # vertx-kotlin-scaffold
-vertx kotlin jdbc-client 脚手架
+vertx kotlin mongo-client 脚手架
 
 ## 技术栈
 
 - vertx
 - kotlin-coroutines
-- vertx-jdbc-client
-- HikariCP
+- mongo-client
 - logback
 - jackson
 - konform(数据校验)
