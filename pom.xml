@@ -29,8 +29,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <logback.version>1.2.3</logback.version>
         <jackson-module-kotlin.version>2.9.1</jackson-module-kotlin.version>
-        <mysql-connector-java.version>8.0.15</mysql-connector-java.version>
-        <hikaricp.version>3.3.1</hikaricp.version>
+
 
         <!--plugin-->
         <maven-shade-plugin.version>2.4.3</maven-shade-plugin.version>
@@ -125,19 +124,6 @@
                 <artifactId>junit-jupiter-engine</artifactId>
                 <version>${junit-jupiter.version}</version>
                 <scope>test</scope>
-            </dependency>
-
-            <!--mysql-->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector-java.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.zaxxer</groupId>
-                <artifactId>HikariCP</artifactId>
-                <version>${hikaricp.version}</version>
             </dependency>
 
             <!--log-->

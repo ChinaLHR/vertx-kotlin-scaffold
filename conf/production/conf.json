@@ -5,15 +5,22 @@
       "cms": 10020
     }
   },
-  "mysql": {
-    "provider_class": "io.vertx.ext.jdbc.spi.impl.HikariCPDataSourceProvider",
-    "jdbcUrl": "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC",
-    "driverClassName": "com.mysql.jdbc.Driver",
-    "username": "root",
-    "password": "root",
-    "maximumPoolSize": 100,
-    "cachePrepStmts": true,
-    "prepStmtCacheSize": 300,
-    "prepStmtCacheSqlLimit": 2048
+  "mongoDB": {
+    "host": "127.0.0.1",
+    "port": 27017,
+    "db_name": "test",
+    "useObjectId": true,
+    "serverSelectionTimeoutMS": 30000,
+    "maxPoolSize": 50,
+    "minPoolSize": 5,
+    "maxIdleTimeMS": 300000,
+    "maxLifeTimeMS": 3600000,
+    "waitQueueMultiple": 10,
+    "waitQueueTimeoutMS": 10000,
+    "connectTimeoutMS": 300000,
+    "socketTimeoutMS": 100000,
+    "sendBufferSize": 8192,
+    "receiveBufferSize": 8192,
+    "keepAlive": true
   }
 }
