@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject
 
 
 lateinit var httpConf: HttpConf
-lateinit var mysqlConf: JsonObject
+lateinit var mongoDbConf:JsonObject
 
 /**
  * @author lhr
