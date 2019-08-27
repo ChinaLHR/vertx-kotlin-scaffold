@@ -1,6 +1,5 @@
-package io.github.lhr.core.entity
+package io.github.lhr.core.domain.entity
 
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 
 /**
@@ -9,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 data class User(
 
-        @JsonInclude(JsonInclude.Include.NON_NULL)
-        @JsonProperty("_id")
         var _id: String,
 
         @JsonProperty("name")

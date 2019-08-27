@@ -1,7 +1,7 @@
 package io.github.lhr.core.dao
 
 import io.github.lhr.core.dao.base.AbstractDao
-import io.github.lhr.core.entity.User
+import io.github.lhr.core.domain.entity.User
 
 /**
  * @Author : lhr

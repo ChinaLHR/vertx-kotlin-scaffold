@@ -1,6 +1,6 @@
 package io.github.lhr.core.dao.base
 
-import io.github.lhr.core.entity.converters.ModelConverter
+import io.github.lhr.core.domain.entity.converters.ModelConverter
 import io.vertx.core.json.JsonObject
 import io.vertx.kotlin.ext.mongo.findAwait
 import io.vertx.kotlin.ext.mongo.findOneAwait

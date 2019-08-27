@@ -1,4 +1,4 @@
-package io.github.lhr.core.entity.converters
+package io.github.lhr.core.domain.entity.converters
 
 import io.vertx.core.json.JsonArray
 import io.vertx.core.json.JsonObject

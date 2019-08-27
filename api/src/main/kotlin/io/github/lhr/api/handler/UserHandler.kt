@@ -1,7 +1,7 @@
 package io.github.lhr.api.handler
 
 import io.github.lhr.core.dao.UserDao
-import io.github.lhr.core.entity.User
+import io.github.lhr.core.domain.entity.User
 import io.github.lhr.core.ext.ok
 import io.vertx.ext.web.RoutingContext
 
@@ -21,6 +21,8 @@ class UserHandler {
     }
 
     suspend fun insertUser(ctx: RoutingContext) {
+        val user = ctx.bodyAsJson.mapTo(User::class.java)
+
         userDao.save(ctx.bodyAsJson)
         ctx.ok("操作成功")
     }
