@@ -2,6 +2,7 @@ package io.github.lhr.api.handler
 
 import io.github.lhr.core.dao.UserDao
 import io.github.lhr.core.domain.entity.User
+import io.github.lhr.core.domain.entity.converters.ModelConverter
 import io.github.lhr.core.domain.vo.UserVO
 import io.github.lhr.core.ext.ok
 import io.vertx.ext.web.RoutingContext
@@ -22,7 +23,7 @@ class UserHandler {
     }
 
     suspend fun insertUser(ctx: RoutingContext) {
-        val user = ctx.bodyAsJson.mapTo(UserVO::class.java)
+        val user = ModelConverter.fromJson<UserVO>(ctx.bodyAsJson)
         userDao.save(user)
         ctx.ok("操作成功")
     }
