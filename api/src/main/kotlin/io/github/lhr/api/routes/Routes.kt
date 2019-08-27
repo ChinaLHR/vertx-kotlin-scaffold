@@ -17,7 +17,6 @@ class Routes(vertx: Vertx) : CoroutineRoute(vertx) {
         val userHandler = UserHandler()
         router.get("/api/user/findAll").coroutineHandler { ctx -> userHandler.findAll(ctx) }
         router.get("/api/user/findOne").coroutineHandler { ctx -> userHandler.findById(ctx) }
-        router.post("/api/user/update").coroutineHandler { ctx -> userHandler.updateUser(ctx) }
         router.get("/api/user/save").coroutineHandler { ctx -> userHandler.insertUser(ctx) }
     }
 }

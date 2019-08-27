@@ -4,8 +4,11 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import io.github.lhr.core.conf.HttpConf
 import io.github.lhr.core.conf.httpConf
 import io.github.lhr.core.conf.mongoDbConf
+import io.github.lhr.core.dao.base.MongoDbPool
+import io.github.lhr.core.dao.base.mongoClient
 import io.vertx.core.json.Json
 import io.vertx.core.json.JsonObject
+import io.vertx.ext.mongo.MongoClient
 import io.vertx.kotlin.coroutines.CoroutineVerticle
 import org.slf4j.LoggerFactory
 import org.slf4j.LoggerFactory.getLogger
@@ -31,6 +34,8 @@ abstract class CoreVerticle : CoroutineVerticle() {
         Json.mapper.registerModule(KotlinModule())
 
         setConf(config)
+        mongoClient = MongoClient.createShared(vertx, mongoDbConf)
+
         logger.info("Init CoreVerticle Success,Conf:{} ",
                 config.toString())
     }

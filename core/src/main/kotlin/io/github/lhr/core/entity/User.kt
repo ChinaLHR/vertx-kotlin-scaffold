@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 data class User(
 
-        @JsonProperty("_id")
         @JsonInclude(JsonInclude.Include.NON_NULL)
+        @JsonProperty("_id")
         var _id: String,
 
         @JsonProperty("name")

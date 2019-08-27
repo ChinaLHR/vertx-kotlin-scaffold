@@ -10,5 +10,5 @@ vertx kotlin mongo-client 脚手架
 - mongo-client
 - logback
 - jackson
-- konform(数据校验)
+- vertx-service-proxy
 
