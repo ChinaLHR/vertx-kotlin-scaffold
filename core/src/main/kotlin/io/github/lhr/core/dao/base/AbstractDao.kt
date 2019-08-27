@@ -1,7 +1,7 @@
-package io.github.lhr.core.dao
+package io.github.lhr.core.dao.base
 
 import io.github.lhr.core.conf.mongoDbConf
-import io.github.lhr.core.entity.ModelConverter
+import io.github.lhr.core.entity.converters.ModelConverter
 import io.vertx.core.Vertx
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.mongo.MongoClient
