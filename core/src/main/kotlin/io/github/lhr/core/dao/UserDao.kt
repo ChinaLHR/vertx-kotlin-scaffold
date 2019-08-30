@@ -8,3 +8,4 @@ import io.github.lhr.core.domain.entity.User
  * @Date : 11:52 2019/8/27
  */
 class UserDao : AbstractDao<User, String>("user")
+

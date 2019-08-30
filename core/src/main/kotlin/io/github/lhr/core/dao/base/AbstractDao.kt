@@ -3,6 +3,7 @@ package io.github.lhr.core.dao.base
 import io.github.lhr.core.domain.entity.converters.ModelConverter
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.mongo.BulkOperation
+import io.vertx.ext.mongo.FindOptions
 import io.vertx.kotlin.ext.mongo.*
 
 /**
@@ -38,4 +39,13 @@ abstract class AbstractDao<T, ID>(val collection: String) {
     suspend fun bulkWrite(operations: List<BulkOperation>) {
         mongoClient.bulkWriteAwait(collection, operations)
     }
+
+    /**
+     * 在指定的collection中查找匹配的文档，指定选项
+     */
+    suspend inline fun <reified T> findWithOption(options: FindOptions, query: JsonObject = JsonObject()): List<T> {
+        val result = mongoClient.findWithOptionsAwait(collection, query, options)
+        return ModelConverter.fromJson(result)
+    }
+
 }

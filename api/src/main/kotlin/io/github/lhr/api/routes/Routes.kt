@@ -18,5 +18,6 @@ class Routes(vertx: Vertx) : CoroutineRoute(vertx) {
         router.get("/api/user/findAll").coroutineHandler { ctx -> userHandler.findAll(ctx) }
         router.get("/api/user/findOne").coroutineHandler { ctx -> userHandler.findById(ctx) }
         router.get("/api/user/save").coroutineHandler { ctx -> userHandler.insertUser(ctx) }
+        router.get("/api/user/list").coroutineHandler { ctx -> userHandler.pageTurn(ctx) }
     }
 }
