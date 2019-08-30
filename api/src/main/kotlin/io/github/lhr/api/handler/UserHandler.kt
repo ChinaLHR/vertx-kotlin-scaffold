@@ -3,12 +3,14 @@ package io.github.lhr.api.handler
 import io.github.lhr.core.dao.UserDao
 import io.github.lhr.core.domain.entity.User
 import io.github.lhr.core.domain.entity.converters.ModelConverter
+import io.github.lhr.core.domain.vo.IdPageVO
 import io.github.lhr.core.domain.vo.PageVO
 import io.github.lhr.core.domain.vo.UserVO
 import io.github.lhr.core.ext.ok
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.mongo.FindOptions
 import io.vertx.ext.web.RoutingContext
+import org.slf4j.LoggerFactory
 
 
 /**
@@ -54,8 +56,20 @@ class UserHandler {
     /**
      * 翻页查询V2版本
      * Seek Method分页思路:
+     * todo 待修复
      */
-    suspend fun pageTurnV2(ctx: RoutingContext){
+    suspend fun pageTurnV2(ctx: RoutingContext) {
+        val idPageVO = ModelConverter.fromJson<IdPageVO>(ctx.bodyAsJson)
+        val query = JsonObject()
+        query.put("_id", JsonObject().put("\\gt", idPageVO.lastId))
+        val findOptions = FindOptions()
+                .setLimit(idPageVO.pageSize)
 
+        val result = userDao.findWithOption<User>(query = query, options = findOptions)
+        ctx.ok(result)
+    }
+
+    companion object {
+        private val log = LoggerFactory.getLogger(UserHandler::class.java)
     }
 }
