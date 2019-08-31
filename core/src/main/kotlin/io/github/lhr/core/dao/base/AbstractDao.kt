@@ -43,7 +43,7 @@ abstract class AbstractDao<T, ID>(val collection: String) {
     /**
      * 在指定的collection中查找匹配的文档，指定选项
      */
-    suspend inline fun <reified T> findWithOption(options: FindOptions, query: JsonObject = JsonObject()): List<T> {
+    suspend inline fun <reified T> findWithOption(options: FindOptions, query: JsonObject): List<T> {
         val result = mongoClient.findWithOptionsAwait(collection, query, options)
         return ModelConverter.fromJson(result)
     }

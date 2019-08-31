@@ -9,7 +9,7 @@
     "host": "127.0.0.1",
     "port": 27017,
     "db_name": "test",
-    "useObjectId": true,
+    "useObjectId": false,
     "serverSelectionTimeoutMS": 30000,
     "maxPoolSize": 50,
     "minPoolSize": 5,

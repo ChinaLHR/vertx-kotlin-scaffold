@@ -1,6 +1,7 @@
 package io.github.lhr.core.domain.vo
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.bson.types.ObjectId
 
 /**
  * @Author : lhr
