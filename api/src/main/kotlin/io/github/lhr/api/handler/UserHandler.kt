@@ -50,7 +50,7 @@ class UserHandler {
         val pageVO = ModelConverter.fromJson<PageVO>(ctx.bodyAsJson)
         val findOptions = FindOptions()
                 .setLimit(pageVO.pageSize)
-                .setSkip(pageVO.pageNum - 1)
+                .setSkip((pageVO.pageNum - 1) * pageVO.pageSize)
 
         val result = userDao.findWithOption<User>(findOptions, JsonObject())
         ctx.ok(result)
