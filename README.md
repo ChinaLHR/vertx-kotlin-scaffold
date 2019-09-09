@@ -1,7 +1,7 @@
 # vertx-kotlin-scaffold
 vertx kotlin mongo-client 脚手架
 
-(支持直接服务方法调用和Event bus服务方法调用)
+(支持直接服务方法调用和EventBus Proxy方法调用)
 
 ## 技术栈
 
