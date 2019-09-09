@@ -1,4 +1,4 @@
-package io.github.lhr.api
+package io.github.lhr.api.verticle
 
 import io.github.lhr.api.handler.GlobalErrorHandler
 import io.github.lhr.api.routes.Routes

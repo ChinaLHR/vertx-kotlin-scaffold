@@ -30,6 +30,7 @@ class UserServiceProxyImpl(vertx: Vertx, val service: UserService) : AbstractPro
             "insertUser" -> {
                 val userVO = ModelConverter.fromJson<UserVO>(message)
                 service.insertUser(userVO)
+                return JsonObject()
             }
             "pageTurn" -> {
                 val pageVO = ModelConverter.fromJson<PageVO>(message)

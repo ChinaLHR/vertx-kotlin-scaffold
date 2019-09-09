@@ -36,7 +36,7 @@ class UserServiceEventBusProxy(vertx: Vertx, address: String) : UserService, Abs
     }
 
     override suspend fun findById(id: String): User {
-        return ModelConverter.fromJson(this.send("findById", ModelConverter.toJson(id)) as JsonObject)
+        return ModelConverter.fromJson(this.send("findById", JsonObject.mapFrom(mapOf("id" to id))) as JsonObject)
     }
 
 

@@ -17,7 +17,7 @@ interface UserService {
             return UserServiceEventBusProxy(vertx, ADDRESS)
         }
 
-        fun createHandler(vertx: Vertx) {
+        fun createProxyHandler(vertx: Vertx) {
             val userService = UserServiceImpl(vertx)
             UserServiceProxyImpl(vertx, userService)
                     .register(vertx.eventBus(), ADDRESS)
