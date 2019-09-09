@@ -1,11 +1,11 @@
 package io.github.lhr.api
 
 import io.github.lhr.api.verticle.ApiMainVerticle
+import io.github.lhr.api.verticle.ApiServerVerticle
 import io.github.lhr.api.verticle.ApiProxyVerticle
 import io.vertx.core.DeploymentOptions
 import io.vertx.core.Vertx
 import io.vertx.core.json.JsonObject
-import io.vertx.kotlin.core.deployVerticleAwait
 import org.slf4j.LoggerFactory
 import java.io.File
 
@@ -31,17 +31,6 @@ fun main() {
 
         if (apiAr.succeeded()) {
             logger.info("Main ApiMainVerticle Started")
-
-            //deploy proxy verticle
-            vertx.deployVerticle(ApiProxyVerticle(),options){
-                proxyAr ->
-                if (proxyAr.succeeded()) {
-                    logger.info("Main ApiProxyVerticle Started")
-                } else {
-                    logger.error("Main ApiProxyVerticle Error", proxyAr.cause())
-                    System.exit(0)
-                }
-            }
         } else {
             logger.error("Main ApiMainVerticle Error", apiAr.cause())
             System.exit(0)
