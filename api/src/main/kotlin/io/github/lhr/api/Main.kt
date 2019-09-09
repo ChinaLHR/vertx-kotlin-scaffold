@@ -25,23 +25,28 @@ fun main() {
     val conf = JsonObject(jsonStr)
     val options = DeploymentOptions().setConfig(conf)
     val vertx = Vertx.vertx()
-    vertx.deployVerticle(ApiMainVerticle(), options) { ar ->
 
-        if (ar.succeeded()) {
+    //deploy api verticle
+    vertx.deployVerticle(ApiMainVerticle(), options) { apiAr ->
+
+        if (apiAr.succeeded()) {
             logger.info("Main ApiMainVerticle Started")
+
+            //deploy proxy verticle
+            vertx.deployVerticle(ApiProxyVerticle(),options){
+                proxyAr ->
+                if (proxyAr.succeeded()) {
+                    logger.info("Main ApiProxyVerticle Started")
+                } else {
+                    logger.error("Main ApiProxyVerticle Error", proxyAr.cause())
+                    System.exit(0)
+                }
+            }
         } else {
-            logger.error("Main ApiMainVerticle Error", ar.cause())
+            logger.error("Main ApiMainVerticle Error", apiAr.cause())
             System.exit(0)
         }
     }
 
-    vertx.deployVerticle(ApiProxyVerticle(),options){
-        ar ->
-        if (ar.succeeded()) {
-            logger.info("Main ApiProxyVerticle Started")
-        } else {
-            logger.error("Main ApiProxyVerticle Error", ar.cause())
-            System.exit(0)
-        }
-    }
+
 }
